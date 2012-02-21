@@ -6,7 +6,7 @@ A File Template is basically a snippet, a filename, a default path and optional 
 
 # Demo
 
-<iframe width="420" height="315" src="http://www.youtube.com/embed/M4isYen7_Z4" frameborder="0" allowfullscreen></iframe>
+http://www.youtube.com/embed/M4isYen7_Z4
 
 ## Installation
 
