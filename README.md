@@ -24,7 +24,7 @@ The Templates are files with the extension ".file-template"
 
 Here's a basic example 
 
-```
+```xml
 <template>
   <!-- You can us this to specifiy the content for the Template -->
   <!-- <content><![CDATA[ ${0:Hello World} ]]></content> -->
