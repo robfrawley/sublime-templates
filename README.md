@@ -12,7 +12,15 @@ http://www.youtube.com/embed/M4isYen7_Z4
 
 ### Package Control
 
-Not yet, sorry
+The easiest way to install this is with Package Control.
+
+If you just went and installed Package Control, you probably need to restart Sublime Text 2 before doing this next bit.
+
+- Bring up the Command Palette (Command+Shift+p on OS X, Control+Shift+p on Linux/Windows).
+- Select "Package Control: Install Package" (it'll take a few seconds)
+- Select FileTemplates when the list appears.
+
+Package Control will automatically keep FileTemplates up to date with the latest version.
 
 ### Clone from GitHub
 
