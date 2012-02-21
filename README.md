@@ -3,6 +3,11 @@
 This Package enables you and other Package Developers to include File Templates.
 A File Template is basically a snippet, a filename, a default path and optional arguments.
 
+
+# Demo
+
+<iframe width="420" height="315" src="http://www.youtube.com/embed/M4isYen7_Z4" frameborder="0" allowfullscreen></iframe>
+
 ## Installation
 
 ### Package Control
@@ -17,6 +22,7 @@ Not yet, sorry
 
 Bring up the Command Palette and select "Create File From Template" or set up some key bindings as
 explained below.
+
 
 ### Templates
 
