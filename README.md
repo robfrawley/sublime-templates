@@ -1,117 +1,71 @@
-# Quick File Creator plugin for Sublime Text 2
+# File Templates for SublimeText 2
 
-Plugin that lets you quickly create a file or a subdirectory using ST2's fuzzy
-matching feature.
-
-Normally, in order to create a file or directory in ST2, you have to navigate
-to the parent directory in the side panel and right-click on it, or you can open a new
-tab and save it using the operating system's save dialog (which may start in a
-directory completely unrelated to your project if you don't have any files
-already opened).
-
-This plugin instead pops up a quick panel that lets you pick the directory for
-the new file or subdirectory using the built-in fuzzy matching. If you are
-currently editing a file, that file's directory will be located at the top of
-the list to make it even easier to create the new file or subdirectory in the
-same location. Select a directory, input the new name in the input panel at
-the bottom of the window, and you're done!
+This Package enables you and other Package Developers to include File Templates.
+A File Template is basically a snippet, a filename, a default path and optional arguments.
 
 ## Installation
 
 ### Package Control
 
-The easiest way to install this is with [Package
-Control](http://wbond.net/sublime\_packages/package\_control).
-
- * If you just went and installed Package Control, you probably need to restart Sublime Text 2 before doing this next bit.
- * Bring up the Command Palette (Command+Shift+p on OS X, Control+Shift+p on Linux/Windows).
- * Select "Package Control: Install Package" (it'll take a few seconds)
- * Select Quick File Creator when the list appears.
-
-Package Control will automatically keep Quick File Creator up to date with the latest
-version.
+Not yet, sorry
 
 ### Clone from GitHub
 
-Alternatively, you can clone the repository directly from GitHub into your Packages directory:
-
-    git clone http://github.com/noklesta/SublimeQuickFileCreator
+    git clone http://github.com/mneuhaus/SublimeFileTemplates
 
 ## Usage
 
-Bring up the Command Palette and select "Quick File Creator: Create file" or
-"Quick File Creator: Create directory", or set up some key bindings as
+Bring up the Command Palette and select "Create File From Template" or set up some key bindings as
 explained below.
+
+### Templates
+
+The Templates are files with the extension ".file-template"
+
+Here's a basic example 
+
+```
+<template>
+  <!-- You can us this to specifiy the content for the Template -->
+  <!-- <content><![CDATA[ ${0:Hello World} ]]></content> -->
+
+  <!-- Or you set a path to a seperate Template File here -->
+  <file>jQueryPlugin.js</file>
+
+  <!-- The filename for the new File, you can use the arguments to make it dynamic -->
+  <filename>jquery.$name.js</filename>
+
+  <!-- Default Path to create the new file inside your current Project -->
+  <!-- you can use the arguments to make it dynamic -->
+  <path>js/</path>
+
+  <!-- Optional: Add as much arguments as you need, they will be asked in the order specified -->
+  <arguments>
+    <name>Name:</name>
+  </arguments>
+</template>
+```
 
 ## Key bindings
 
 The plugin does not install any key bindings automatically. You can set up
 your own key bindings like this:
 
-    { "keys": ["super+ctrl+n"], "command": "quick_create_file" },
-    { "keys": ["super+ctrl+d"], "command": "quick_create_directory" }
+    { "keys": ["super+ctrl+n"], "command": "create_file_from_template" }
 
 If you are using Vintage mode and want to use sequences of non-modifier keys,
 you can restrict the key bindings to command mode like this:
 
-    { "keys": [" ", "n"], "command": "quick_create_file", "context": [{"key": "setting.command_mode"}] },
-    { "keys": [" ", "d"], "command": "quick_create_directory", "context": [{"key": "setting.command_mode"}] }
+    { "keys": [" ", "n"], "command": "create_file_from_template", "context": [{"key": "setting.command_mode"}] }
 
-## Excluded directories
 
-Some directories, such as those named "tmp" or ".git", are excluded by default
-in order to make the directory listing easier to navigate. You can override
-this setting by specifying a list of regular expressions either in
-Packages/User/SublimeQuickFileCreator.sublime-settings or, for a particular
-project, in the project file under a top-level "settings" key. It might be a
-good idea to copy the list in
-Packages/SublimeQuickFileCreator/SublimeQuickFileCreator.sublime-settings and
-modify it.
+## Thanks
 
-Note that each pattern is anchored to the beginning and end of the directory
-name, so you should not use ^ or $ in your patterns. Also, since ST2 does not
-allow backslashes in settings files, use a vertical bar (|) instead of a
-backslash to escape special regex symbols such as dots in directory names.
-
-Example of setting the list of excluded directories in your user preferences file:
-
-    {
-      "excluded_dir_patterns": [
-        "tmp", "|.git", "|.svn"
-      ]
-    }
-
-...and in a project file:
-
-    {
-      "folders":
-      [
-        {
-          "path": "/path/to/project"
-        }
-      ],
-      "settings":
-      {
-        "SublimeQuickFileCreator":
-          {
-            "excluded_dir_patterns":
-            [
-              "tmp.*", "|.git", "|.svn", "|.hg"
-            ]
-          }
-      }
-    }
-
-## Future work
-
-It seems to me that ST2 does not currently support programmatically selecting
-a directory in the side bar (please correct me if I'm wrong!). If ST2 includes
-this ability in the future, I will make any newly created subdirectories
-become immediately selected.
+This Package was forked from [SublimeQuickFileCreator](https://github.com/noklesta/SublimeQuickFileCreator) because it provided the best base for my needs and a good starting point to learn from :)
 
 ## Licence
 
-All of SublimeQuickFileCreator is licensed under the MIT licence.
+All of SublimeFileTemplates is licensed under the MIT licence.
 
   Copyright (c) 2012 Anders Nøklestad
 
