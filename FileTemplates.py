@@ -96,6 +96,7 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
         for root, dirnames, filenames in os.walk(sublime.packages_path()):
             for filename in filenames:
                 if filename.endswith(".file-template"):
+                    print(filename)
                     self.template_paths.append(os.path.join(root, filename))
                     self.templates.append(os.path.basename(root) + ": " + os.path.splitext(filename)[0])
 
