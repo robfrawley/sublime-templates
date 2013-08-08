@@ -18,14 +18,14 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
             return
 
         self.find_templates()
-        self.window.show_quick_panel(self.templates, self.template_selected)
+        self.show_quick_panel(self.templates, self.template_selected)
 
     def create_and_open_file(self, path):
         if not os.path.exists(os.path.dirname(path)):
             os.makedirs(os.path.dirname(path))
-        
+
         open(path, 'w')
-        
+
         global template
         template = {
             'content': self.replace_variables(self.get_content(path)),
@@ -34,7 +34,7 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
         }
 
         global current_path
-        
+
         view = self.window.open_file(path)
         current_path = view.file_name()
 
@@ -52,7 +52,7 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
         try:
             path = os.path.abspath(os.path.join(os.path.dirname(self.template_path), self.template.find("file").text))
             content = open(path).read()
-            print content
+            print(content)
         except:
             pass
 
@@ -88,7 +88,7 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
             settings = sublime.load_settings('FileTemplates.sublime-settings')
             results = settings.get(key)
         return results
-    
+
     def find_templates(self):
         self.templates = []
         self.template_paths = []
@@ -105,11 +105,11 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
             #print self.template_path
             tree = ElementTree.parse(open(self.template_path))
             self.template = tree
-            
+
             self.construct_excluded_pattern()
             self.build_relative_paths()
             #self.move_current_directory_to_top()
-            self.window.show_quick_panel(self.relative_paths, self.dir_selected)
+            self.show_quick_panel(self.relative_paths, self.dir_selected)
 
     def build_relative_paths(self):
         self.relative_paths = []
@@ -146,7 +146,7 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
     def dir_selected(self, selected_index):
         if selected_index != -1:
             self.selected_dir = self.relative_paths[selected_index]
-            
+
             filename = ''
             if len(self.template.find("filename").text) > 0:
                 filename = self.template.find("filename").text
@@ -155,7 +155,7 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
                 self.arguments = list(self.template.find("arguments"))
             except:
                 self.arguments = []
-            
+
             self.variables = {}
             self.next_argument()
 
@@ -185,7 +185,7 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
             dir = ''
         if self.selected_dir.startswith("Default: "):
             dir = self.template.find("path").text
-        
+
         dir = self.replace_variables(dir)
 
         full_path = os.path.join(self.root, dir, file_name)
@@ -194,7 +194,10 @@ class CreateFileFromTemplateCommand(sublime_plugin.WindowCommand):
             return
         else:
             self.create_and_open_file(full_path)
-            
+
+    def show_quick_panel(self, options, done):
+        sublime.set_timeout(lambda: self.window.show_quick_panel(options, done), 10)
+
 class FileTemplatesListener(sublime_plugin.EventListener):
     def on_load(self, view):
         global current_path
